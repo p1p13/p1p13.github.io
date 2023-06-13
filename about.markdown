@@ -4,6 +4,6 @@ title: About
 permalink: /about/
 ---
 
-I am a Software Engineer at Microsoft Advertisement. Most of my work revolves around Information Retrieval and Natural Language Processing. I am excited about analyzing language with the lens of Computer Science and Mathematics.
+I am a Machine Learning Engineer at Microsoft Advertisement. My areas of interest span Information Retrieval, NLP, Vision and Deep Learning Theory.
 
-Besides, I am broadly interested in the Theory of Deep Learning and Computational Neuroscience.
+I have created this blog to create ML notes and also to organise my thoughts in general.
