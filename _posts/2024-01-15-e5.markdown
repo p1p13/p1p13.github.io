@@ -41,10 +41,10 @@ Assumption - When trained on noisy datasets, neural networks tend to memorize th
 ### Contrastive Pre-Training
 
 - Distinguish relevant text pairs fro other irrelevant pairs
-- Given a collection of text pairs $\{(q_i, p_i)\}_{i=1}^n$$,
- assign a list of negative passages $\{p_{i,j}^-\}_{j=1}^m$ for the i-th example.
+- Given a collection of text pairs $$\{(q_i, p_i)\}_{i=1}^n$$,
+ assign a list of negative passages $$\{p_{i,j}^-\}_{j=1}^m$$ for the i-th example.
 - InfoNCE contrastive loss $$min L = -\frac{1}{n}\sum_ilog\frac{e^{s_\theta(q_i,\; p_i)}} {e^{s_\theta(q_i,\; p_i)} + \sum_je^{s_\theta(q_i,\; p_{ij}^-)}} $$ ,
-where  $ s_\theta(q,p) $ is a scoring function between q and p parametrized by $ \theta $.
+where  $$ s_\theta(q,p) $$ is a scoring function between q and p parametrized by $$ \theta $$.
 
 - Pre-trained transformer encoder + average pooling over output layer.
 - Use shared encoder and break symmetry by adding prefix identifiers "query:" and "passage".
@@ -58,4 +58,4 @@ where  $ s_\theta(q,p) $ is a scoring function between q and p parametrized by $
 - NLI - use contradiction sentences as hard negatives.
 - Loss function is combination of distillation and contrastive loss:
     $$min \ D_{KL}(p_{ce}, p_{stu}) + \alpha L_{cont}$$
-    where  $ p_{ce} $ and $ p_{stu} $ ae the probabilities from the cross-encoder teacher mdoe and student model.
+    where  $$ p_{ce} $$ and $$ p_{stu} $$ ae the probabilities from the cross-encoder teacher mdoe and student model.
