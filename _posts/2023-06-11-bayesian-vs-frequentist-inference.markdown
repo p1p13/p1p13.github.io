@@ -16,10 +16,10 @@ For example - parameter can be the the mean, $$\theta$$ of a probability distrib
 ### Bayesian Statistics
 
 In this field, we use posterior distribution to represent our uncertainty.
-This implies that the parameter $$\theta$$ is considered an unknown random variable. We start with a prior distribution $$P(\theta)$$ and define a likelihood function $$P(\theta|D)$$, where D stands for some fixed dataset. For example - it can be a list of values drawn from a Probability distribution.
+This implies that the parameter $$\theta$$ is considered an unknown random variable. We start with a prior distribution $$P(\theta)$$ and define a likelihood function $$P(D|\theta)$$, where D stands for some fixed dataset. For example - it can be a list of values drawn from a Probability distribution.
 We then use Bayes to rule to calculate posterior as:
 
-$$P(\theta|D) = \dfrac{P(\theta)P(\theta|D)}{P(D)}$$ 
+$$P(\theta|D) = \dfrac{P(\theta)P(D|\theta)}{P(D)}$$ 
 
 ### Frequentist Statistics
 
