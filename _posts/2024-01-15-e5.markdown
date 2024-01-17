@@ -63,18 +63,18 @@ where  $$ s_\theta(q,p) $$ is a scoring function between q and p parametrized by
 
 ## Experiments
 
-![Alt text](/_assets/image.png)
+![Alt text](/assets/image.png)
 
-![Alt text](/_assets/image-2.png)
+![Alt text](/assets/image-2.png)
 
-![Alt text](/_assets/image-3.png)
+![Alt text](/assets/image-3.png)
 
 ## Ablation
 
-![Alt text](/_assets/image-4.png)
+![Alt text](/assets/image-4.png)
 
-![Alt text](/_assets/image-5.png)
+![Alt text](/assets/image-5.png)
 
-![Alt text](/_assets/image-6.png)
+![Alt text](/assets/image-6.png)
 
-![Alt text](/_assets/image-7.png)
+![Alt text](/assets/image-7.png)
