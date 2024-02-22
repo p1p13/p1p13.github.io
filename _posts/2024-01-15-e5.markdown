@@ -30,7 +30,7 @@ The data sources used are:
 ### Consistency-Based Filtering
 
 - A model is trained on the 1.3 B noisy text pairs.
-- It is then used to ranl each pair against 1 M random passages.
+- It is then used to rank each pair against 1 M random passages.
 - A text pair is kept if it falls in top-k ranked list.
 - k=2 based on manual inspection, ends up with ~270 M pairs.
 
@@ -40,7 +40,7 @@ Assumption - When trained on noisy datasets, neural networks tend to memorize th
 
 ### Contrastive Pre-Training
 
-- Distinguish relevant text pairs fro other irrelevant pairs
+- Distinguish relevant text pairs from other irrelevant pairs
 - Given a collection of text pairs $$\{(q_i, p_i)\}_{i=1}^n$$,
  assign a list of negative passages $$\{p_{i,j}^-\}_{j=1}^m$$ for the i-th example.
 - InfoNCE contrastive loss $$min L = -\frac{1}{n}\sum_ilog\frac{e^{s_\theta(q_i,\; p_i)}} {e^{s_\theta(q_i,\; p_i)} + \sum_je^{s_\theta(q_i,\; p_{ij}^-)}} $$ ,
@@ -54,7 +54,7 @@ where  $$ s_\theta(q,p) $$ is a scoring function between q and p parametrized by
 ### Fine-tuning with Labeled Data
 
 - Supervised finetuning with NLI(Semantic Textual Similarity) and MS-MARCO + NQ (Retrieval).
-- Mined haed negatives from Cross encoder for MS-MARCO and NQ datasets.
+- Mined hard negatives from Cross encoder for MS-MARCO and NQ datasets.
 - NLI - use contradiction sentences as hard negatives.
 - Loss function is combination of distillation and contrastive loss:
     $$min \ D_{KL}(p_{ce}, p_{stu}) + \alpha L_{cont}$$
