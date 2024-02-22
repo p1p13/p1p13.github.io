@@ -18,9 +18,10 @@ categories: Paper notes (Unpolished)
 
 - Proposes a model which supports multi-linguality, multi-functionality and multi-granularity.
 
-- Formally, given a query q in an arbitrary langugae x, M3 embeddings are able to retrieve document d in language y from the corpus $$ D^y: d^y <- fn^*(q^x, D^y) $$
+- Formally, given a query q in an arbitrary langugae x, M3 embeddings are able to retrieve document d in language y from the corpus $$ D^y: d^y \leftarrow fn^*(q^x, D^y) $$
 
-    - $fn^*(.)$ can be - dense, sparse/lexical or multi-vector retrieval.
+    - $$ fn^*(.) $$ 
+      can be - dense, sparse/lexical or multi-vector retrieval.
     - y can be another language or same as x.
 
 
@@ -38,12 +39,14 @@ categories: Paper notes (Unpolished)
         - Sample lengthy articles from  Wiki/MC4 and randomly choose paragraphs. 
         - Use GPT 3.5 to generate questions based on these paragraphs.
 
+![Training data](/assets/bge-m3-embedddings/training-data.png)
+
 
 ## Hybrid Retrieval
 
 ### Dense Retrieval
 
-- Use the normalized hideen state of [CLS] token for representation of query, $$e_q$$ and passage, $$e_p$$.
+- Use the normalized hidden state of [CLS] token for representation of query, $$e_q$$ and passage, $$e_p$$.
 - relevance score: $$s_{dense}= <e_p, e_q>$$
 
 ### Lexical Retrieval
@@ -51,7 +54,7 @@ categories: Paper notes (Unpolished)
 - Use output embeddings to estimate importance of each term
 - Term weight of each term t in a query q:
 $$w_{qt}=Relu(W^T_{lex}H_q[i])$$
-where $$W^T_{lex} \ \epsilon \  R^{dXl}$$.
+where $$W^T_{lex} \ \epsilon \  R^{d \times 1}$$.
 
 - same for passage
 - relevance score computed by joint importance of co-existed terms:
@@ -61,7 +64,7 @@ where $$W^T_{lex} \ \epsilon \  R^{dXl}$$.
 ### Multi-Vector Retrieval
 
 - Use entire output embeddings for query/passage representation.
-- $$E_q = norm(W_{mul}^TH_q), E_p = norm(W_{mul}^TH_p), W_{mul} \ \epsilon \ R^{d \ x \ d} $$
+- $$E_q = norm(W_{mul}^TH_q), E_p = norm(W_{mul}^TH_p), W_{mul} \ \epsilon \ R^{d \ \times \ d} $$
 - Use late interaction like colbert to compute fine-grained relevance score:
     $$s_{mul} = \frac1N \sum_{i=1}^Nmax_{j=1}^ME_q[i].E_p^T[j]$$ 
     N and M are lengths of query and passage.
@@ -77,17 +80,17 @@ where $$p^*$$ and $$P^`$$ stand for positive and negative samples to query q; s(
 
 - Naive multi-objective training unfavourable since training objectives can be mutually conflicting.
 
-- Use self knowledge distillation, predictionsfrom different integration methods can be integrated.
+- Use self knowledge distillation, predictions from different retrieval methods can be integrated.
 
 - simplest form, $$s_{inter} = s_{dense}(.)+ s_{lex}(.)+ s_{mul}(.)$$. use this as the teacher.
 
 - loss function of each retrieval method:
 $$L_*^`=-p(s_{inter}) * \log p(s_*)$$
 
-$$p(.)$$ 
-is softmax activation
-$$s_*$$ 
-is any of the members within {$$s_{dense}(.), s_{lex}(.), s_{mul}(.) $$}.
+    $$p(.)$$ 
+    is softmax activation,
+    $$s_*$$ 
+    is any of the members within {$$s_{dense}(.), s_{lex}(.), s_{mul}(.) $$}.
 
 - $$L' = \frac{L^`_{dense} + L^`_{lex} + L^`_{mul}}{3}$$
 
@@ -95,7 +98,7 @@ is any of the members within {$$s_{dense}(.), s_{lex}(.), s_{mul}(.) $$}.
 - $$L_{final} = L^` + L$$
 
 - Fist text encoder is pretrained on unsupervised data where only dense retreival is trained.
-- Self knowledge distillation is applied to second stage whem model is finetuned on labeled and synthetic data. 
+- Self knowledge distillation is applied to second stage when model is finetuned on labeled and synthetic data. 
     - ANCE used for hard negative.
 
 ## Efficient  Batching
