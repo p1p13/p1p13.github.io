@@ -41,7 +41,7 @@ categories: Paper notes (Unpolished)
 - For every $$ m \ \epsilon \ M $$, MRL enables each of the first m dimensions of embedding vector, $$ z_{1:m} \ \epsilon \ R^m$$ to be independently capable of being a transferrable and general purpose representation of the data point.
 
 - Usually $$ M $$
-  consists of having until representation size hits a low dimenstional bottleneck.
+  consists of halving until representation size hits a low dimenstional bottleneck.
 
 - Suppose we are given a labelled dataset:
     $$D= \{(x_1,y_1),...,(x_N,y_N) $$
@@ -52,7 +52,7 @@ categories: Paper notes (Unpolished)
 
 - MRL optimizes the following mult-class classification loss:
 
-    $$ {\{W^{(m)}\}_{m \ \epsilon \ M }, \theta_F}^{min} \frac{1}{N} \sum_{i \ \epsilon \ [N]}\sum_{m \ \epsilon \ M}c_m. L(W^{(m)}.F(x_i;\theta_F)_{1:m};y_i) $$
+    $$ {_{\{W^{(m)}\}_{m \ \epsilon \ M }, \theta_F}}^{min} \frac{1}{N} \sum_{i \ \epsilon \ [N]}\sum_{m \ \epsilon \ M}c_m. L(W^{(m)}.F(x_i;\theta_F)_{1:m};y_i) $$
     where
     - $$L: R^L \times [L] \mapsto R_+ $$
       is the multi-class softmax cross-entropy loss function.
@@ -84,9 +84,9 @@ categories: Paper notes (Unpolished)
 
 ### Adaptive Classification
 
-- Coarse to fine granularity of the representation allsows model cascases for Adaptive Classification.
+- Coarse to fine granularity of the representation allows model cascades for Adaptive Classification.
 - Learn thresholds on max softmax probability for each nested classfifier on a holdout validation set.
-- Use these thresholds to decide when to transition to highe dimensional representation.
+- Use these thresholds to decide when to transition to higher dimensional representation.
 
   ![adaptive-classification](/assets/matryoshka/adaptive-classification.png)
 
